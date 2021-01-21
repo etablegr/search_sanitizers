@@ -283,7 +283,7 @@ class SearchSanitizers
         $value        = mb_strtolower($value);
 
         $doubleCharReplacements = [
-            'gk' => 'g',
+            'γκ' => 'g',
             'αυ' => 'af',
             'ευ' => 'ef',
             'αι' => 'e',
@@ -313,7 +313,7 @@ class SearchSanitizers
             "σ" => "s",
             "τ" => "t",
             "υ" => "i",
-            "φ" => "ph",
+            "φ" => "f",
             "χ" => "x",
             "ψ" => "ps",
             "ω" => "o",
@@ -340,6 +340,28 @@ class SearchSanitizers
         return $value;
     }
 
+    public static function replaceRomanDoubleChars($value): string
+    {
+        $doubleCharReplacements = [
+            'gk' => 'g',
+            'ai' => 'e',
+            'gg' => 'g',
+            'ei' => 'i',
+            'oi' => 'i',
+            'ph' => 'f'
+        ];
+
+        if (!empty($value)) {
+            $value = str_replace(
+                array_keys($doubleCharReplacements),
+                array_values($doubleCharReplacements),
+                $value
+            );
+        }
+
+        return $value;
+    } 
+
     public static function removeDuplicateChars($term): string
     {
         $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
@@ -351,6 +373,7 @@ class SearchSanitizers
         $term = self::sanitizeSearchTerm($value);
         $term = self::greekRomanize($term);
         $term = self::removeDuplicateChars($term);
+        $term = self::replaceRomanDoubleChars($term);
 
         return $term;
     }

@@ -90,10 +90,37 @@ class SearchSanitizersTest extends TestCase
         $this->assertEquals($expected, $output);
     }
 
-    public function sanitizeSearchTermRomanized()
+    public function testSanitizeSearchTermRomanized()
     {
         $input    = "Ὦ κοινὸν αὐτάδελφον Ἰσμήνης κάρα,";
-        $expected = "koinon aftadelfon isminis kara";
+        $expected = "o kinon aftadelfon isminis kara";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
+        $this->assertEquals($expected, $output);
+    }
+
+    public function testSanitizeSearchTermRomanizedDoubleChars()
+    {
+        $input    = "αι ομορφες γυναίκες τρώνε αγγούρια";
+        $expected = "e omorfes ginekes trone agiria";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
+        $this->assertEquals($expected, $output);
+    }
+
+    public function testSanitizeSearchTermRomanizedIota()
+    {
+        $input    = "ει οι η ή οί εί";
+        $expected = "i i i i i i";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
+        $this->assertEquals($expected, $output);
+    }
+
+    public function testSanitizeSearchTermRomanizedOmikron()
+    {
+        $input    = "ω";
+        $expected = "o";
 
         $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
         $this->assertEquals($expected, $output);
