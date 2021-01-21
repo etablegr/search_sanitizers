@@ -1,6 +1,6 @@
 {
     "name": "etablegr/search_sanitizers",
-    "description": "etable API client",
+    "description": "Input Sabnitization for Search parameters",
     "type": "library",
     "license": "MIT",
     "authors": [
