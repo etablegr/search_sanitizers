@@ -3,7 +3,7 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Etable\SearchSanitizers;
+use Etable\Search\SearchSanitizers;
 
 class SearchSanitizersTest extends TestCase
 {

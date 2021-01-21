@@ -1,5 +1,5 @@
 {
-    "name": "etablegr/search-sanitizers",
+    "name": "etablegr/search_sanitizers",
     "description": "etable API client",
     "type": "library",
     "license": "MIT",
