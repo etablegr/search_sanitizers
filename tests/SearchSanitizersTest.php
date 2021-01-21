@@ -74,7 +74,7 @@ class SearchSanitizersTest extends TestCase
     public function testSanitizeSearchTermUnaccent()
     {
         $input    = "Ὦ κοινὸν αὐτάδελφον Ἰσμήνης κάρα,";
-        $expected = "κοινον αυταδελφον ισμηνησ καρα";
+        $expected = "ω κοινον αυταδελφον ισμηνησ καρα";
 
         $output = SearchSanitizers::sanitizeSearchTerm($input);
         $this->assertEquals($expected, $output);
@@ -82,11 +82,20 @@ class SearchSanitizersTest extends TestCase
 
     public function testSanitizeSpecialCharacters()
     {
-        $input    = "!#().-_+&'\"`]";
+        $input    = "!#().-_+&'\"`][{}";
         $expected = "";
 
         $output = SearchSanitizers::sanitizeSearchTerm($input);
 
+        $this->assertEquals($expected, $output);
+    }
+
+    public function sanitizeSearchTermRomanized()
+    {
+        $input    = "Ὦ κοινὸν αὐτάδελφον Ἰσμήνης κάρα,";
+        $expected = "koinon aftadelfon isminis kara";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
         $this->assertEquals($expected, $output);
     }
 }

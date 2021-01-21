@@ -270,7 +270,7 @@ class SearchSanitizers
     {
         $value = self::filterString($value);
         $value = mb_strtolower($value);
-        $value = str_replace(['!', '#', '(', ')', '.', '-', '_', '+', '&', ',', "'", '`', '"'], '', $value);
+        $value = str_replace(['!', '#', '(', ')', '.', '-', '_', '+', '&', ',', "'", '`', '"',']','[','{','}'], '', $value);
         $value = self::unaccentGreekString($value);
         $value = self::removeExcessWhitespace($value);
 
@@ -281,6 +281,17 @@ class SearchSanitizers
     {
         $value        = self::filterString($value);
         $value        = mb_strtolower($value);
+
+        $doubleCharReplacements = [
+            'gk' => 'g',
+            'αυ' => 'af',
+            'ευ' => 'ef',
+            'αι' => 'e',
+            'γγ' => 'g',
+            'ει' => 'i',
+            'οι' => 'i'
+        ];
+
         $replacements = [
             "α" => "a",
             "β" => "b",
@@ -306,18 +317,19 @@ class SearchSanitizers
             "χ" => "x",
             "ψ" => "ps",
             "ω" => "o",
-            "ει" => "i",
-            "οι" => "i",
-            'ch' => "x",
-            'γk' => "g",
             'ά'  => 'a',
             'ώ'  => "o",
             'ς'  => "s",
-            'ό'  => 'o',
-            'gk' => 'g'
+            'ό'  => 'o'
         ];
 
         if (!empty($value)) {
+            $value = str_replace(
+                array_keys($doubleCharReplacements),
+                array_values($doubleCharReplacements),
+                $value
+            );
+
             $value = str_replace(
                 array_keys($replacements),
                 array_values($replacements),
