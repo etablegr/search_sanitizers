@@ -1,0 +1,28 @@
+{
+    "name": "etablegr/search-sanitizers",
+    "description": "etable API client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yannis Rizos",
+            "email": "yrizos@gmail.com"
+        },
+        {
+            "name": "Dimitrios Desyllas",
+            "email": "d.desyllas@e-table.gr"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Etable\\Search": "src/",
+            "Tests\\":  "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1"
+    }
+}
