@@ -277,6 +277,10 @@ class SearchSanitizers
         return $value;
     }
 
+    /**
+     * Romanize greek letters
+     * @param string $value The value containing greek strings
+     */
     public static function greekRomanize($value): string
     {
         $value        = self::filterString($value);
@@ -340,6 +344,10 @@ class SearchSanitizers
         return $value;
     }
 
+    /**
+     * Replaces some 2 characters sets into different ones.
+     * @param string $value The value that contains the characters need to be replaced.
+     */
     public static function replaceRomanDoubleChars($value): string
     {
         $doubleCharReplacements = [
@@ -362,17 +370,16 @@ class SearchSanitizers
         return $value;
     } 
 
-    public static function removeDuplicateChars($term): string
-    {
-        $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
-        return $term;
-    }
 
+    /**
+     * Turns greek letters into romanized ones.
+     * @param string $value The value 
+     */
     public static function sanitizeSearchTermRomanized($value): string
     {
         $term = self::sanitizeSearchTerm($value);
         $term = self::greekRomanize($term);
-        $term = self::removeDuplicateChars($term);
+        $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
         $term = self::replaceRomanDoubleChars($term);
 
         return $term;

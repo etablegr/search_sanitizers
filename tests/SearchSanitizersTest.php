@@ -134,4 +134,14 @@ class SearchSanitizersTest extends TestCase
         $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
         $this->assertEquals($expected, $output);
     }
+
+    public function testGreekRomanizeLatin()
+    {
+        $string   = "αβγδεζηθικλμνξοπρστφχψω";
+        $expected = "abgdezithiklmnksoprstfxpso";
+
+        $output = SearchSanitizers::greekRomanize($string);
+
+        $this->assertEquals($expected, $output);
+    }
 }
