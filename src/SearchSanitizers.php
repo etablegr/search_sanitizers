@@ -337,8 +337,8 @@ class SearchSanitizers
     public static function sanitizeSearchTermRomanized($value): string
     {
         $term = self::sanitizeSearchTerm($value);
-        $term = self::greekRomanize($value);
-        $term = self::removeDuplicateChars($value);
+        $term = self::greekRomanize($term);
+        $term = self::removeDuplicateChars($term);
 
         return $term;
     }
