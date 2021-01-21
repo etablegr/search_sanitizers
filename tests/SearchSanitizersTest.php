@@ -125,4 +125,13 @@ class SearchSanitizersTest extends TestCase
         $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
         $this->assertEquals($expected, $output);
     }
+
+    public function testSanitizeSearchTermRomanizedRemoveDuplicates()
+    {
+        $input    = "έλλα ελλα ella έλα ελα ela";
+        $expected = "ela ela ela ela ela ela";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($input);
+        $this->assertEquals($expected, $output);
+    }
 }
