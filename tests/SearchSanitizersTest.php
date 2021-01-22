@@ -154,4 +154,14 @@ class SearchSanitizersTest extends TestCase
 
         $this->assertEquals($expected, $output);
     }
+
+    public function testSanitizeSearchTermRomanizedWithNonLetterChars()
+    {
+        $string   = "καλημέρα τι κάνεις? όλα καλά; Χθες, έφαγα ψάρι.";
+        $expected = "kalimera ti kanis ola kala xthes efaga psari";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($string);
+
+        $this->assertEquals($expected, $output);
+    }
 }

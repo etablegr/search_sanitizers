@@ -293,7 +293,8 @@ class SearchSanitizers
             'αι' => 'e',
             'γγ' => 'g',
             'ει' => 'i',
-            'οι' => 'i'
+            'οι' => 'i',
+            'ou' => 'u'
         ];
 
         $replacements = [
@@ -324,7 +325,10 @@ class SearchSanitizers
             'ά'  => 'a',
             'ώ'  => "o",
             'ς'  => "s",
-            'ό'  => 'o'
+            'ό'  => 'o',
+            'έ'  => 'e',
+            'ή'  => 'i',
+            'ί'  => 'i'
         ];
 
         if (!empty($value)) {
@@ -356,7 +360,8 @@ class SearchSanitizers
             'gg' => 'g',
             'ei' => 'i',
             'oi' => 'i',
-            'ph' => 'f'
+            'ph' => 'f',
+            'ou' => 'u'
         ];
 
         if (!empty($value)) {
@@ -377,10 +382,12 @@ class SearchSanitizers
      */
     public static function sanitizeSearchTermRomanized($value): string
     {
-        $term = self::sanitizeSearchTerm($value);
+        $term = self::unaccentGreekString($value);
+        $term = self::sanitizeSearchTerm($term);
         $term = self::greekRomanize($term);
-        $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
         $term = self::replaceRomanDoubleChars($term);
+        $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
+        $term = preg_replace("/[^a-zA-Z\s1-9]/","",$term);
 
         return $term;
     }
