@@ -1,6 +1,6 @@
 <?php
 
-namespace Etable\Search;
+namespace Etable;
 
 class SearchSanitizers
 {
