@@ -147,8 +147,8 @@ class SearchSanitizersTest extends TestCase
 
     public function testGreekRomanizeLatinWithLatinChars()
     {
-        $string   = "abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $expected = "abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwxyz";
+        $string   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $expected = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
 
         $output = SearchSanitizers::greekRomanize($string);
 
@@ -164,4 +164,15 @@ class SearchSanitizersTest extends TestCase
 
         $this->assertEquals($expected, $output);
     }
+
+    public function testSanitizeSearchTermRomanizedWithLatinChars()
+    {
+        $string   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $expected = "abcdefghijklmnopqrstuvwxizabcdefghijklmnopqrstuvwxiz";
+
+        $output = SearchSanitizers::sanitizeSearchTermRomanized($string);
+
+        $this->assertEquals($expected, $output);
+    }
+
 }

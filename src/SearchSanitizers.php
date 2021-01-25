@@ -375,7 +375,6 @@ class SearchSanitizers
         return $value;
     } 
 
-
     /**
      * Turns greek letters into romanized ones.
      * @param string $value The value 
@@ -388,6 +387,7 @@ class SearchSanitizers
         $term = self::replaceRomanDoubleChars($term);
         $term = preg_replace("/([a-zA-Z])\\1+/","$1",$term);
         $term = preg_replace("/[^a-zA-Z\s1-9]/","",$term);
+        $term = str_replace('y','i',$term);
 
         return $term;
     }
